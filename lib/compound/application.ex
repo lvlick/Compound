@@ -10,6 +10,7 @@ defmodule Compound.Application do
     children = [
       # Starts a worker by calling: Compound.Worker.start_link(arg)
       # {Compound.Worker, arg},
+      {Compound.TCP.Supervisor, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

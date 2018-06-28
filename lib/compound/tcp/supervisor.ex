@@ -12,10 +12,17 @@ defmodule Compound.TCP.Supervisor do
     Supervisor.start_link(__MODULE__, arg, name: __MODULE__)
   end
 
-  def init(arg) do
-    children = [
-    ]
+  def init(_arg) do
+    servers = Application.get_env(:compound, :tcp_servers)
+    children = (servers
+               |> Enum.map(
+                    fn (conf) -> %{
+                                   id: "[" <> conf.id <> "]TCP.Server",
+                                   start: {Compound.TCP.Server, :start_link, [{conf.id, conf.port}]}
+                                 }
+                    end
+                  ))
 
-    supervise(children, strategy: :one_for_one)
+    Supervisor.init(children, strategy: :one_for_one)
   end
 end
