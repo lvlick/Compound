@@ -1,6 +1,9 @@
 # Compound
 
-Compound is a minimalistic TCP Server written in Elixir.
+A minimalistic TCP Server written in Elixir.
+
+## Introduction 
+
 ## Installation 
 
 Compound can be added to your project 
@@ -31,4 +34,5 @@ config :compound, tcp_servers: [
 
 A server configuration consists of an id (as a `string`) and a port (as an `integer`).
 
-
+After starting your elixir app simply call `Compound.TCP.set_default_callback(server, callback)` with the id of the server from the configuration and a pid. 
+Incoming packets for that server will be forwarded to your callback process as `{:new_packet, packet, sender}`.

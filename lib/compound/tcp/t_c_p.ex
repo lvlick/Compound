@@ -4,8 +4,8 @@ defmodule Compound.TCP do
   
   """
 
-  def set_default_callback(server, pid) do
+  def set_default_callback(server, callback) do
     name = "[" <> server <> "]TCP.Server" |> String.to_atom()
-    GenServer.cast(name, {:set_default, pid})
+    GenServer.cast(name, {:set_default, callback})
   end
 end
