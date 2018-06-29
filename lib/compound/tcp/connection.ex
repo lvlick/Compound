@@ -62,6 +62,10 @@ defmodule Compound.TCP.Connection do
     {:noreply, %{state | callback: pid}}
   end
 
+  def handle_call({:send, packet}, _from, state) do
+    :gen_tcp.send(state.socket, packet)
+  end
+
   def terminate(_reason, state) do
     socket = state.socket
     :gen_tcp.close(socket)

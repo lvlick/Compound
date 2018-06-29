@@ -2,7 +2,10 @@
 
 A minimalistic TCP Server written in Elixir.
 
-## Introduction 
+## Introduction
+Compound goal is to offer a simple API that allows users to send and receive packets via TCP connections.
+Each TCP connection is handled by its own process utilizing Elixir's `GenServer` behavior.
+For your applications to be able to handle packets received by Compound, callbacks are used with the possibility of each connection having its own callback.
 
 ## Installation 
 
@@ -23,7 +26,7 @@ and then running `mix deps.get` to install it.
 
 Before you can use Compound you have to take a few steps.
 
-First you need to add one or more server configurations to your config:
+First you need to add one or more server configurations to your `config.exs`:
 
 ```elixir
 config :compound, tcp_servers: [
