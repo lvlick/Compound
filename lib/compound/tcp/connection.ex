@@ -63,7 +63,10 @@ defmodule Compound.TCP.Connection do
   end
 
   def handle_call({:send, packet}, _from, state) do
-    :gen_tcp.send(state.socket, packet)
+    case :gen_tcp.send(state.socket, packet) do
+      :ok -> {:reply, :ok, state}
+      {:error, reason} -> {:reply, {:error, reason}, state}
+    end
   end
 
   def terminate(_reason, state) do

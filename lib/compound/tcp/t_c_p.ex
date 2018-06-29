@@ -1,7 +1,7 @@
 defmodule Compound.TCP do
   @moduledoc ~S"""
   Module providing functions for the TCP-API of Compound.
-  
+  M
   """
 
   def set_default_callback(server, callback) do
@@ -16,4 +16,10 @@ defmodule Compound.TCP do
   def send_packet(connection, packet) do
     GenServer.call(connection, {:send, packet})
   end
+
+  def connect(server, ip, port) do
+    name = "[" <> server <> "]TCP.Server" |> String.to_atom()
+    GenServer.call(name, {:connect, ip, port})
+  end
 end
+
